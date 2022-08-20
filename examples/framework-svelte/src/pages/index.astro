@@ -1,9 +1,26 @@
 ---
-// Component Imports
-import Counter from '../components/Counter.svelte';
+import Component from '../components/Component.astro';
 
-// Full Astro Component Syntax:
-// https://docs.astro.build/core-concepts/astro-components/
+const components = [
+	{
+		id: 'section1-1',
+		component: 'section1'
+	},
+	{
+		id: 'section1-3',
+		component: 'section1',
+		props: {
+			text: 'Section 3'
+		}
+	},
+	{
+		id: 'section1-2',
+		component: 'section1',
+		props: {
+			text: 'Section 2'
+		}
+	}
+];
 ---
 
 <html lang="en">
@@ -11,23 +28,10 @@ import Counter from '../components/Counter.svelte';
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
-		<style>
-			html,
-			body {
-				font-family: system-ui;
-				margin: 0;
-			}
-			body {
-				padding: 2rem;
-			}
-		</style>
+		<title>Astro</title>
 	</head>
 	<body>
-		<main>
-			<Counter client:visible>
-				<h1>Hello, Svelte!</h1>
-			</Counter>
-		</main>
+		<h1>Astro</h1>
+		{components.map((component) => <Component {...component} />)}
 	</body>
 </html>

@@ -1,0 +1,23 @@
+---
+import Section1 from './Section1.astro';
+
+const { id, component, props = {} } = Astro.props;
+---
+
+<div {id} class:list={[ 'component', component ]}>
+    <button id={id + '_moveup'} onclick="moveUpHandler();">Move up</button>
+    {
+        (() => {
+            switch (component) {
+                case 'section1': return <Section1 {...props} />;
+            }
+        })()
+    }
+</div>
+
+<script define:vars={{ id }}>
+    function moveUpHandler() {
+        let element = document.getElementById(id);
+        console.log(element);
+    }
+</script>
