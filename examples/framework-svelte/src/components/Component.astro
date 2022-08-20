@@ -2,10 +2,11 @@
 import Section1 from './Section1.astro';
 
 const { id, component, props = {} } = Astro.props;
+const buttonId = id + '_moveup'
 ---
 
 <div {id} class:list={[ 'component', component ]}>
-    <button id={id + '_moveup'} onclick="moveUpHandler();">Move up</button>
+    <button id={buttonId}>Move up</button>
     {
         (() => {
             switch (component) {
@@ -15,9 +16,8 @@ const { id, component, props = {} } = Astro.props;
     }
 </div>
 
-<script define:vars={{ id }}>
-    function moveUpHandler() {
-        let element = document.getElementById(id);
-        console.log(element);
-    }
+<script define:vars={{ id, buttonId }}>
+    document.getElementById(buttonId).addEventListener('click', function() {
+        console.log(this.closest('#' + id));
+    });
 </script>
